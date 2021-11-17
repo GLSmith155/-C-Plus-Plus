@@ -1,2 +1,2 @@
-# -C-Plus-Plus
+# C-Plus-Plus
 Code library for C++
