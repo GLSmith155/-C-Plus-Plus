@@ -1,2 +1,2 @@
 # C-Plus-Plus
-Code library for C++
+Projects I've completed using C++.
