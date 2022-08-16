@@ -73,7 +73,34 @@ int main()
     default:
         cout << "You have entered an invalid grade. Try again."<< endl;
  }
- 
-    
     return 0;
 }
+// *******************************************************************
+
+// Repitition Control Statements
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int count = 0;
+    
+    while (count < 10) {
+        if (count == 5) {
+            count++;
+            continue;
+        }
+        cout << count << endl;
+        count++;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (i == 5) {
+            break;
+        }
+    }
+    return 0;
+}
+
