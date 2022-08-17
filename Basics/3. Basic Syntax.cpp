@@ -19,7 +19,7 @@ int main()
 
     return 0;
 }
-// The array class.
+// The Array Class.
 // The Array Class is very similar to built-in arrays, 
 // but is object-oriented.
 
