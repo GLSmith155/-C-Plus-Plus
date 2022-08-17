@@ -14,7 +14,7 @@ int main()
     const double MY_PI = 3.14159;    // Constants are typically in "capitalize underscore capitalize" case.
     char singleChar = 'a';  
     int myInt;  // Cannot accomodate decimal numbers.
-    myInt = 15; // const makes the variable (the l variable) unchangable
+    myInt = 15; // Const makes the variable (the l variable) unchangable
     string myName = "log";    // endl creates new line.
     double myDouble = 3.1419;
     cout << "hello" << endl << myDouble << endl << myInt << endl << myName << endl;
