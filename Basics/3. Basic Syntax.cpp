@@ -29,7 +29,7 @@ using namespace std;
 
 int main()
 {
-    // If some Ints are defined, then the undefined one's will be 0.
+    // If some ints are defined, then the undefined one's will be 0.
     array<int, 5> myIntegerArray{1}; // Output:  1,0,0,0,0
     
     for (int a : myIntegerArray) {
