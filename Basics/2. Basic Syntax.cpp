@@ -1,6 +1,6 @@
 /*
 Control Flow Basics.
-Control Statements have 3 main cateogires
+Control Statements have 3 main categories.
 1. Sequential Statements (Sequence Statements) - Statements executed in sequence one after another.
 2. Selection Statements (Decision Statements)
 3. Repetition Statements (Loops)
