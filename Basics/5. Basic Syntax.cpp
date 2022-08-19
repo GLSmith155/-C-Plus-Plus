@@ -1,4 +1,4 @@
-/**   Multidimensional Arrays -
+/**   Multidimensional Arrays
  * Most common are 2D arrays. Useful in representing
  * rows and columns. First index represents the row,
  * and second index represents the column.
