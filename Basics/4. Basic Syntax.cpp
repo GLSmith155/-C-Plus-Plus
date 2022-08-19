@@ -12,9 +12,9 @@ using namespace std;
 /** Vector Methods / Member functions:
  * push_back - Used to extend vector with a new element at end.
  * pop_back - Used to remove element at end of vector.
- * front - returns front element.   back - returns last element.
- * instert - can insert an element anywhere in vector.
- * begin - returns the beginning of the vector. Used to insert.
+ * front - Returns front element.   back - returns last element.
+ * instert - Can insert an element anywhere in vector.
+ * begin - Returns the beginning of the vector. Used to insert.
 **/
 int main()
 {
