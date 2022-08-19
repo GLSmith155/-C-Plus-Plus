@@ -11,7 +11,7 @@ using namespace std;
 // The & allows the change to be persistent throughout the app.
 void someFunction(int aParam);
 
-
+// Lifetime of a global variable is as long as the program is running.
 double myGlobalDouble = 3.14159;
 
 int main() {
@@ -27,8 +27,14 @@ int main() {
 
 void someFunction(int aParam) {
     int myLocalNum = 100;
-    
+    static int myStatic = 500;
+    myStatic++;
+// Static variables will live for the whole application, but can only
+// be accessed inside someFunction. (Whereas myLocalNum will be reset /
+// and has a shorter lifetime.
     cout << "My local number is " << myLocalNum << endl;
     cout << "The parameter is " << aParam << endl;
     cout << "My global double (in someFunction) is " << myGlobalDouble << endl;
+    cout << "My static variable: " << myStatic << endl;
+    
 }
