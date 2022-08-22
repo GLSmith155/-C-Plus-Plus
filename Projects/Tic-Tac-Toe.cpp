@@ -1,5 +1,5 @@
-/** Project: Tic-Tac-Toe
- * 
+/** Project: 
+ * Tic-Tac-Toe
 **/
 
 /** I'll make a 3x3 2d array and represent these visually with
@@ -12,25 +12,16 @@
 #include <iostream>
 using namespace std;
 
-/** Draft Functions:
- * void boardVisual(2d array): When called prints the board.
- * int boardArray(array, array)
-**/
-//int multiply(int a, int b, int c);
-void boardVisual(string a, string b, string c);
-void boardVisual2();
+
+void chooseLetter();
+
 int main() {
-    string temp;
+    
     // Not 100% sure how to implement as a function. Will do in main first, then try in fun.
-    string boardArray[3][3] {
-        {"a", "b", "c"},
-        {"d", "e", "f"},
-        {"g", "h", "i"}
-    };
+
     
-    cout << "------------------------------------------" << endl;
-    cout << "You're X's! Pick a square to place your X!" << endl;
-    
+
+/**    
     // Print Out boardArray.
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {
@@ -38,32 +29,80 @@ int main() {
         }
         cout << endl;
     }
-    
+ **/   
     // cin a-i. Find letter in 2d array, change it to X.
-    cin >> temp;
-    std::find
-    boardArray[temp] = X;
+  //  cin >> temp;
+  //  boardArray[temp] = X;
     
-    boardVisual2();
+    chooseLetter();
     
     return 0;
 }
 
-void boardVisual(string a, string b, string c, string d, string e, string f, string g, string h, string i) {
-    cout << "------------------------------------------" << endl;
-    cout << "You're X's! Pick a square to place your X!" << endl;
-    cout << a + " | " + b + " | " + c << endl;
-    cout << " -  -  - " << endl;
-    cout << d + " | " + e + " | " + f << endl;
-    cout << " -  -  -" << endl;
-    cout << g + " | " + h + " | " + i << endl;
-}
 
-void boardVisual2() {
+void chooseLetter() {
+    
+    string temp;
+
+   // Build Initial Array Board 
+    string boardArray[3][3] {
+        {"a", "b", "c"},
+        {"d", "e", "f"},
+        {"g", "h", "i"}
+    };
+    
+    int i = 0;
+    int x = 0;
+    while (i < 3) {
+    
+
+        // Check if Win/Lose condition is met.
         for (int row = 0; row < 3; row++) {
-        for (int col = 0; col < 3; col++) {
-            cout << boardArray[row][col] << " ";
+            for (int col = 0; col < 3; col++) {
+                x++;
+                if (x == 3) {
+                    i = 0;
+                }
+                if (boardArray[row][col] == "X") {
+                    i++;
+                }
+             //   cout << boardArray[row][col] << " ";
+            }
         }
+        
+        
+        // Print Out boardArray.
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                cout << boardArray[row][col] << " ";
+            }
+            cout << endl;
+        }
+        
+        cout << "------------------------------------------" << endl;
+        cout << "Welcome to Tic-Tac-Toe!" << endl;
+        cout << "You are X's. Type a letter to place your X." << endl;
+        cin >> temp;
         cout << endl;
+        // Replace chosen spot with X.
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (boardArray[row][col] == temp) {
+                    boardArray[row][col] = "X";
+                }
+             //   cout << boardArray[row][col] << " ";
+            }
+            //cout << endl;
+        }
+    }
+    if (i > 2) {
+        // Print Out boardArray.
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                cout << boardArray[row][col] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl << "Goodjob, You Won!";
     }
 }
