@@ -1,5 +1,5 @@
 /** Project: 
- * Tic-Tac-Toe
+ * Tic-Tac-Toe with computer opponent.
 **/
 
 /** I'll make a 3x3 2d array and represent these visually with
@@ -10,40 +10,27 @@
 **/
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
-
 void chooseLetter();
+void printBoard();
 
 int main() {
-    
-    // Not 100% sure how to implement as a function. Will do in main first, then try in fun.
-
-    
-
-/**    
-    // Print Out boardArray.
-    for (int row = 0; row < 3; row++) {
-        for (int col = 0; col < 3; col++) {
-            cout << boardArray[row][col] << " ";
-        }
-        cout << endl;
-    }
- **/   
-    // cin a-i. Find letter in 2d array, change it to X.
-  //  cin >> temp;
-  //  boardArray[temp] = X;
     
     chooseLetter();
     
     return 0;
 }
 
-
 void chooseLetter() {
-    
+    int randSelection = 0;
     string temp;
-
+    int i = 0;
+    int x = 0;
+    
+    cout << "Welcome to Tic-Tac-Toe!" << endl;
+   
    // Build Initial Array Board 
     string boardArray[3][3] {
         {"a", "b", "c"},
@@ -51,12 +38,25 @@ void chooseLetter() {
         {"g", "h", "i"}
     };
     
-    int i = 0;
-    int x = 0;
     while (i < 3) {
-    
-
-        // Check if Win/Lose condition is met.
+        
+        // Check if diagnol win/lose condition has been met.
+        if (boardArray[0][0] == "X") {
+             if (boardArray[1][1] == "X") {
+                if (boardArray[2][2] == "X") {
+                    i = 3;
+                }
+             }
+        }
+         if (boardArray[0][2] == "X") {
+             if (boardArray[1][1] == "X") {
+                if (boardArray[0][2] == "X") {
+                    i = 3;
+                }
+             }
+        }    
+        
+        // Check if horizontal and vertical win/lose condition is met.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 x++;
@@ -66,11 +66,21 @@ void chooseLetter() {
                 if (boardArray[row][col] == "X") {
                     i++;
                 }
-             //   cout << boardArray[row][col] << " ";
+                else {
+                }
             }
         }
         
-        
+        int randRow;
+        int randCol;
+        randRow = rand()%(2-0 + 0) + 0;
+        randCol = rand()%(2-0 + 0) + 0;
+        while (randSelection == 0) {
+            if (boardArray[randRow][randCol] != "X" || "O") {
+                boardArray[randRow][randCol] = "O";
+                randSelection++;
+            }
+        }
         // Print Out boardArray.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
@@ -80,7 +90,6 @@ void chooseLetter() {
         }
         
         cout << "------------------------------------------" << endl;
-        cout << "Welcome to Tic-Tac-Toe!" << endl;
         cout << "You are X's. Type a letter to place your X." << endl;
         cin >> temp;
         cout << endl;
@@ -90,13 +99,14 @@ void chooseLetter() {
                 if (boardArray[row][col] == temp) {
                     boardArray[row][col] = "X";
                 }
-             //   cout << boardArray[row][col] << " ";
             }
-            //cout << endl;
         }
     }
+    
+    
+    
+    // Print out victory message if i is greater than 2.
     if (i > 2) {
-        // Print Out boardArray.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 cout << boardArray[row][col] << " ";
