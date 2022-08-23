@@ -11,6 +11,9 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <chrono>
+#include <random>
 using namespace std;
 
 void chooseLetter();
@@ -24,7 +27,7 @@ int main() {
 }
 
 void chooseLetter() {
-    int randSelection = 0;
+
     string temp;
     int i = 0;
     int x = 0;
@@ -71,16 +74,28 @@ void chooseLetter() {
             }
         }
         
+        // Computer's Turn.
+        
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
+
+//    std::cout << dist6(rng) << std::endl;
+    
+        int randSelection = 0;
         int randRow;
         int randCol;
-        randRow = rand()%(2-0 + 0) + 0;
-        randCol = rand()%(2-0 + 0) + 0;
         while (randSelection == 0) {
-            if (boardArray[randRow][randCol] != "X" || "O") {
+
+            randRow = dist6(rng);
+            randCol = dist6(rng);
+
+            if (boardArray[randRow][randCol] != "X" && boardArray[randRow][randCol] != "O") {
                 boardArray[randRow][randCol] = "O";
                 randSelection++;
             }
         }
+        
         // Print Out boardArray.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
