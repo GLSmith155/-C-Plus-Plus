@@ -93,13 +93,14 @@ void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
                         }
                     }
                 }
+                // Calls the checkForWin function since the user just moved.
+                checkForWin(boardArray, i, vertLose, horizLose, horizWin);
                 
             }
 
         }
         
-        // Calls the checkForWin function since the user just moved.
-        checkForWin(boardArray, i, vertLose, horizLose, horizWin);
+
     } 
     // After while loop is exited either a victory, loss, or draw message is given.
     
@@ -153,7 +154,7 @@ void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose,
     }
     if (boardArray[0][2] == "X") {
         if (boardArray[1][1] == "X") {
-            if (boardArray[0][2] == "X") {
+            if (boardArray[2][0] == "X") {
                 i = 3;
                 x = -50;
                 y = -50;
