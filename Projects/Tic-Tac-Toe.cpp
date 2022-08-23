@@ -30,6 +30,8 @@ void chooseLetter() {
     string temp;
     int i = 0;
     int x = 0;
+    int y = 0;
+    int horizWin = 0;
     
     cout << "Welcome to Tic-Tac-Toe!" << endl;
    
@@ -40,42 +42,49 @@ void chooseLetter() {
         {"g", "h", "i"}
     };
     
-    while (i < 3) {
+    while (i < 3 && horizWin < 3) {
         
         // Check if diagnol win/lose condition has been met.
         if (boardArray[0][0] == "X") {
-             if (boardArray[1][1] == "X") {
+            if (boardArray[1][1] == "X") {
                 if (boardArray[2][2] == "X") {
                     i = 3;
+                    x = -10;
+                    y = -10;
                     break;
                 }
              }
         }
-         if (boardArray[0][2] == "X") {
-             if (boardArray[1][1] == "X") {
+        if (boardArray[0][2] == "X") {
+            if (boardArray[1][1] == "X") {
                 if (boardArray[0][2] == "X") {
                     i = 3;
+                    x = -10;
+                    y = -10;
                     break;
                 }
              }
         }    
+        
         x = 0;
+        y = 0;
         // Check if horizontal and vertical win/lose condition is met.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
            //     cout << "loop" << endl;
-             //   cout << "x is " << x << endl;
-           //     cout << "i is " << i << endl;
-                if (x == 3) {
-                    i = 0;
-                    x = 0;
-                }
+                cout << "y is " << y << endl;
+                cout << "i is " << i << endl;
                 
                 // Horizontal Checker.
+                if (x == 3) {
+                    horizWin = 0;
+                    x = 0;
+                }
                 if (boardArray[row][col] == "X") {
-                    i++;
-                    if (i == 3) {
+                    horizWin++;
+                    if (horizWin == 3) {
                         x = -9;
+                        break;
                     }
                     x++;
                 }
@@ -84,44 +93,47 @@ void chooseLetter() {
                 }
                 
                 // Vertical Checker;
+                if (y == 3) {
+                    i = 0;
+                    y = 0;
+                } 
+                
                 if (boardArray[col][row] == "X") {
                     i++;
                     if (i == 3) {
-                        x = -9;
+                        y = -9;
+                        break;
                     }
-                    x++;
+                    y++;
                 }
                 else {
-                    x++;
+                    y++;
                 }
-            //    if (boardArray[row][col] == "X") {
-         //           i++;
-              //      x++;
-               // }
-
             }
         }
+        cout << "h is " << horizWin << endl << "i is " << i << endl;
+        if (horizWin < 3 && i < 3) {
+            
+            // Computer's Turn.
+            std::random_device dev;
+            std::mt19937 rng(dev());
+            std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
         
-        // Computer's Turn.
-        std::random_device dev;
-        std::mt19937 rng(dev());
-        std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
+            int randSelection = 0;
+            int randRow;
+            int randCol;
+            while (randSelection == 0) {
     
-        int randSelection = 0;
-        int randRow;
-        int randCol;
-        while (randSelection == 0) {
-
-            randRow = dist6(rng);
-            randCol = dist6(rng);
-
-            if (boardArray[randRow][randCol] != "X" && boardArray[randRow][randCol] != "O") {
-                boardArray[randRow][randCol] = "O";
-                randSelection++;
+                randRow = dist6(rng);
+                randCol = dist6(rng);
+    
+                if (boardArray[randRow][randCol] != "X" && boardArray[randRow][randCol] != "O") {
+                    boardArray[randRow][randCol] = "O";
+                    randSelection++;
+                }
             }
-        }
         
-        if (i < 3) {
+        
                 
             // Print Out boardArray.
             for (int row = 0; row < 3; row++) {
@@ -149,7 +161,7 @@ void chooseLetter() {
     
     
     // Print out victory message if i is greater than 2.
-    if (i > 2) {
+    if (i > 2 || horizWin > 2) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 cout << boardArray[row][col] << " ";
