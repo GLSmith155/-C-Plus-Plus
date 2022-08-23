@@ -1,10 +1,7 @@
-/** Project: 
- * Tic-Tac-Toe with computer opponent.
-**/
-
-/** I'll make a 3x3 2d array and represent these visually with
+/** Project:  Tic-Tac-Toe with computer opponent.
+ * Make a 3x3 2d array and represent these visually with
  * X's and O's. After every move, the board will print, and
- * upon getting 3 in a row "victory" will be printed. 
+ * upon getting 3 in a row "victory" or "you lose" will be printed. 
 **/
 
 #include <iostream>
@@ -13,45 +10,52 @@
 #include <random>
 using namespace std;
 
-void chooseLetter(int i, int vertLose, int horizLose, int horizWin);
-void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose, int& horizWin);
+void chooseLetter(int vertWin, int vertLose, int horizLose, int horizWin);
+void checkForWin(string boardArray[3][3], int& vertWin, int& vertLose, int& horizLose, int& horizWin);
 
 int main() {
     
-    int i = 0;
+    // Integer variables that I will use to find a vertical or horizontal win or loss.
+    int vertWin = 0;
     int horizWin = 0;
     int vertLose = 0;
     int horizLose = 0;
     
-    chooseLetter(i, vertLose, horizLose, horizWin);
+    chooseLetter(vertWin, vertLose, horizLose, horizWin);
     
     return 0;
 }
 
 // This function houses the while loop that runs the tic-tac-toe game.
 // Inside it also calls the checkForWin function after each player and computer move happens.
-void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
+void chooseLetter(int vertWin, int vertLose, int horizLose, int horizWin) {
 
+    // cin variable for the user's move.
     string temp;
+    
+    // Used to indicate that a draw has been reached.
+    int drawCounter = 0;
     
     cout << "Welcome to Tic-Tac-Toe!" << endl;
    
-   // Build Initial Array Board 
+   // Creates Initial 2D-Array Board.
     string boardArray[3][3] {
         {"a", "b", "c"},
         {"d", "e", "f"},
         {"g", "h", "i"}
     };
     
-    while (i < 3 && horizWin < 3 && vertLose < 3 && horizLose < 3) {
-    
+    while (vertWin < 3 && horizWin < 3 && vertLose < 3 && horizLose < 3 && drawCounter < 6) {
+        
+        drawCounter++;
+        
         // If we haven't won or lost yet, computer will go then the user.
-        if (horizWin < 3 && i < 3 && vertLose < 3 && horizLose < 3) {
+        if (horizWin < 3 && vertWin < 3 && vertLose < 3 && horizLose < 3 && drawCounter < 6) {
             
-            // Computer's Turn.
-            std::random_device dev;
-            std::mt19937 rng(dev());
-            std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
+            // Computer's Turn to place a "O" on the board.
+            random_device dev;
+            mt19937 rng(dev());
+            uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
         
             int randSelection = 0;
             int randRow;
@@ -68,9 +72,9 @@ void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
             }
             
             // Calls the checkForWin function since the computer just moved.
-            checkForWin(boardArray, i, vertLose, horizLose, horizWin);
+            checkForWin(boardArray, vertWin, vertLose, horizLose, horizWin);
             
-            if (horizWin < 3 && i < 3 && vertLose < 3 && horizLose < 3) {
+            if (horizWin < 3 && vertWin < 3 && vertLose < 3 && horizLose < 3 && drawCounter < 5) {
             
                 // Print Out boardArray.
                 for (int row = 0; row < 3; row++) {
@@ -79,7 +83,6 @@ void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
                     }
                     cout << endl;
                 }
-                
                 
                 cout << "------------------------------------------" << endl;
                 cout << "You are X's. Type a letter to place your X." << endl;
@@ -94,18 +97,14 @@ void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
                     }
                 }
                 // Calls the checkForWin function since the user just moved.
-                checkForWin(boardArray, i, vertLose, horizLose, horizWin);
-                
+                checkForWin(boardArray, vertWin, vertLose, horizLose, horizWin);
             }
-
         }
-        
-
     } 
-    // After while loop is exited either a victory, loss, or draw message is given.
     
+    // After while loop is exited either a victory, loss, or draw message is given:
     // Print out victory message.
-    if (i > 2 || horizWin > 2) {
+    if (vertWin > 2 || horizWin > 2) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 cout << boardArray[row][col] << "   ";
@@ -125,10 +124,21 @@ void chooseLetter(int i, int vertLose, int horizLose, int horizWin) {
         }
         cout << endl << "Sorry, you lost!";
     }
+    
+    // Print out draw message.
+    if (drawCounter > 4) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                cout << boardArray[row][col] << "   ";
+            }
+            cout << endl;
+        }
+        cout << endl << "There's been a tie!";
+    }
 }
 
 // Call this function to test if a win or lose condition has been met.
-void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose, int& horizWin) {
+void checkForWin(string boardArray[3][3], int& vertWin, int& vertLose, int& horizLose, int& horizWin) {
     
     // These four variables are used as counters to see if 3 in a row has been achieved yet.
     // Each 3rd call they reset, so that a win or loss is only declared if 3 are in a row.
@@ -140,13 +150,13 @@ void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose,
     horizWin = 0;
     vertLose = 0;
     horizLose = 0;
-    i = 0;
+    vertWin = 0;
     
     // Check if diagnol win condition has been met.
     if (boardArray[0][0] == "X") {
         if (boardArray[1][1] == "X") {
             if (boardArray[2][2] == "X") {
-                i = 3;
+                vertWin = 3;
                 x = -50;
                 y = -50;
             }
@@ -155,7 +165,7 @@ void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose,
     if (boardArray[0][2] == "X") {
         if (boardArray[1][1] == "X") {
             if (boardArray[2][0] == "X") {
-                i = 3;
+                vertWin = 3;
                 x = -50;
                 y = -50;
             }
@@ -174,7 +184,7 @@ void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose,
     }
     if (boardArray[0][2] == "O") {
         if (boardArray[1][1] == "O") {
-            if (boardArray[0][2] == "O") {
+            if (boardArray[2][0] == "O") {
                 vertLose = 3;
                 r = -50;
                 f = -50;
@@ -204,12 +214,12 @@ void checkForWin(string boardArray[3][3], int& i, int& vertLose, int& horizLose,
             
             // Vertical win condition;
             if (y > 2) {
-                i = 0;
+                vertWin = 0;
                 y = 0;
             } 
             if (boardArray[col][row] == "X") {
-                i++;
-                if (i > 2) {
+                vertWin++;
+                if (vertWin > 2) {
                     y = -20;
                 }
                 y++;
