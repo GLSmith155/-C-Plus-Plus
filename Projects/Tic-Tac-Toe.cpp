@@ -10,7 +10,6 @@
 **/
 
 #include <iostream>
-#include <vector>
 #include <cstdlib>
 #include <chrono>
 #include <random>
@@ -48,6 +47,7 @@ void chooseLetter() {
              if (boardArray[1][1] == "X") {
                 if (boardArray[2][2] == "X") {
                     i = 3;
+                    break;
                 }
              }
         }
@@ -55,32 +55,57 @@ void chooseLetter() {
              if (boardArray[1][1] == "X") {
                 if (boardArray[0][2] == "X") {
                     i = 3;
+                    break;
                 }
              }
         }    
-        
+        x = 0;
         // Check if horizontal and vertical win/lose condition is met.
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                x++;
+           //     cout << "loop" << endl;
+             //   cout << "x is " << x << endl;
+           //     cout << "i is " << i << endl;
                 if (x == 3) {
                     i = 0;
+                    x = 0;
                 }
+                
+                // Horizontal Checker.
                 if (boardArray[row][col] == "X") {
                     i++;
+                    if (i == 3) {
+                        x = -9;
+                    }
+                    x++;
                 }
                 else {
+                    x++;
                 }
+                
+                // Vertical Checker;
+                if (boardArray[col][row] == "X") {
+                    i++;
+                    if (i == 3) {
+                        x = -9;
+                    }
+                    x++;
+                }
+                else {
+                    x++;
+                }
+            //    if (boardArray[row][col] == "X") {
+         //           i++;
+              //      x++;
+               // }
+
             }
         }
         
         // Computer's Turn.
-        
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
-
-//    std::cout << dist6(rng) << std::endl;
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_int_distribution<std::mt19937::result_type> dist6(0,2); // distribution in range [1, 6]
     
         int randSelection = 0;
         int randRow;
@@ -96,23 +121,26 @@ void chooseLetter() {
             }
         }
         
-        // Print Out boardArray.
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                cout << boardArray[row][col] << " ";
+        if (i < 3) {
+                
+            // Print Out boardArray.
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    cout << boardArray[row][col] << " ";
+                }
+                cout << endl;
             }
+            
+            cout << "------------------------------------------" << endl;
+            cout << "You are X's. Type a letter to place your X." << endl;
+            cin >> temp;
             cout << endl;
-        }
-        
-        cout << "------------------------------------------" << endl;
-        cout << "You are X's. Type a letter to place your X." << endl;
-        cin >> temp;
-        cout << endl;
-        // Replace chosen spot with X.
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                if (boardArray[row][col] == temp) {
-                    boardArray[row][col] = "X";
+            // Replace chosen spot with X.
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    if (boardArray[row][col] == temp) {
+                        boardArray[row][col] = "X";
+                    }
                 }
             }
         }
