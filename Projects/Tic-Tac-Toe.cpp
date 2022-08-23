@@ -49,9 +49,8 @@ void chooseLetter() {
             if (boardArray[1][1] == "X") {
                 if (boardArray[2][2] == "X") {
                     i = 3;
-                    x = -10;
-                    y = -10;
-                    break;
+                    x = -50;
+                    y = -50;
                 }
              }
         }
@@ -59,9 +58,8 @@ void chooseLetter() {
             if (boardArray[1][1] == "X") {
                 if (boardArray[0][2] == "X") {
                     i = 3;
-                    x = -10;
-                    y = -10;
-                    break;
+                    x = -50;
+                    y = -50;
                 }
              }
         }    
@@ -76,15 +74,14 @@ void chooseLetter() {
                 cout << "i is " << i << endl;
                 
                 // Horizontal Checker.
-                if (x == 3) {
+                if (x > 2) {
                     horizWin = 0;
                     x = 0;
                 }
                 if (boardArray[row][col] == "X") {
                     horizWin++;
-                    if (horizWin == 3) {
+                    if (horizWin > 2) {
                         x = -9;
-                        break;
                     }
                     x++;
                 }
@@ -93,16 +90,15 @@ void chooseLetter() {
                 }
                 
                 // Vertical Checker;
-                if (y == 3) {
+                if (y > 2) {
                     i = 0;
                     y = 0;
                 } 
                 
                 if (boardArray[col][row] == "X") {
                     i++;
-                    if (i == 3) {
-                        y = -9;
-                        break;
+                    if (i > 2) {
+                        y = -20;
                     }
                     y++;
                 }
