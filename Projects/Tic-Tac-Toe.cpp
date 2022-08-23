@@ -17,6 +17,7 @@ using namespace std;
 
 void chooseLetter();
 void printBoard();
+void checkForWin(string boardArray[3][3]);
 
 int main() {
     
@@ -97,7 +98,6 @@ void chooseLetter() {
              }
         } 
         
-
         
         // Check if horizontal and vertical win/lose condition is met.
         for (int row = 0; row < 3; row++) {
@@ -168,10 +168,7 @@ void chooseLetter() {
                 }
             }
         }
-        cout << endl << "f is " << f << endl << "r is " << r << endl;
-        cout << "vertLose is " << vertLose << endl;
-        cout << "i is " << i << endl;
-        cout << "horizWin is " << horizWin << endl;
+
         // If we haven't won or lost yet, computer will go then the user.
         if (horizWin < 3 && i < 3 && vertLose < 3 && horizLose < 3) {
             
@@ -194,7 +191,7 @@ void chooseLetter() {
                 }
             }
         
-        
+            checkForWin(boardArray);
                 
             // Print Out boardArray.
             for (int row = 0; row < 3; row++) {
@@ -241,4 +238,8 @@ void chooseLetter() {
         }
         cout << endl << "Sorry, you lost!";
     }
+}
+
+void checkForWin(string boardArray[3][3]) {
+    cout << "Fdsf " << boardArray[0][0];
 }
