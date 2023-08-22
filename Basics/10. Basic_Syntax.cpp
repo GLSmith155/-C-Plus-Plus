@@ -30,7 +30,7 @@ int main()
     cout << i << endl;
     // Output:    55
     //            0
-    // Line 21 breakdown - &r means that r is a reference type, * referes to the type it is referencing.
+    // Line 26 breakdown - &r means that r is a reference type, * referes to the type it is referencing.
     // Next the base type says that r is a reference to a pointer to an int.
     
     // -------------------------------------------------------------------------------------------------------------------
